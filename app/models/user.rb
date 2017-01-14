@@ -7,4 +7,5 @@ class User < ApplicationRecord
 		@email = attributes[:email]
 		@password = attributes[:password]
 		@salt = attributes[:salt]
+	end
 end
