@@ -1,0 +1,17 @@
+<% provide(:title, @user.name) %>
+<h1>
+  <%= gravatar_for @user %>
+  <%= @user.name %>
+</h1>
+
+
+<h2><%= @user.name %></h2>
+<p><%= @user.email %></p>
+<p><%= @user.password %></p>
+<p><%= @user.encrypted_pass_confirmation %></p>
+<hr>
+<%= link_to "Edit", edit_user_path(@user), :class => 'btn btn-default' %>
+<%= link_to "Delete", user_path(@user), 
+					method: :delete,
+					data: {confirm: 'Are you sure?'},
+					:class => 'btn btn-danger' %>
