@@ -21,3 +21,5 @@ class User < ApplicationRecord
 		@salt = attributes[:salt]
 	end
 end
+
+
