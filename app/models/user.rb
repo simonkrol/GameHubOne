@@ -8,7 +8,7 @@ class User < ApplicationRecord
  	validates :password_confirmation, presence: { message: "Password confirmation is required" }
 
  	has_secure_password
- 	cattr_accessor :encrypted_pass, :salt, :encrypted_pass_confirmation
+ 	cattr_accessor :password, :password_confirmation
 
 
 	def initialize(attributes = {})
@@ -16,7 +16,6 @@ class User < ApplicationRecord
 		@address = attributes[:address]
 		@email = attributes[:email]
 		@password = attributes[:password]
-		@salt = attributes[:salt]
 	end
 end
 

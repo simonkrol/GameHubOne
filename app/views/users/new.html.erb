@@ -2,19 +2,27 @@
 <%=form_for :user, url: users_path do |f| %> <!-- Submits the entered form to our create method within the users controller -->
 	
 	<p>
-		<%= f.label :name%><br>
+	<div class="col-md-6 col-md-offset-3", style="margin-bottom:10">
+		
+		<%= f.label 'Name'%><br>
 		<%= f.text_field(:name, {:class => 'form-control'}) %>
-		<%= f.label :address%><br>
+		<p></p>
+		<%=f.label :address%><br>
 		<%= f.text_field(:address, {:class => 'form-control'}) %>
-		<%= f.label :email%><br>
+		<p></p>
+		<%=f.label :email%><br>
 		<%= f.text_field(:email, {:class => 'form-control'}) %>
-		<%= f.label :password%><br>
+		<p></p>
+		<%=f.label 'Password'%><br>
 		<%= f.password_field(:password, {:class => 'form-control'}) %>
-		<%= f.label 'Confirm Password'%><br>
+		<p></p>
+		<%=f.label 'Confirm Password'%><br>
 		<%= f.password_field(:password_confirmation, {:class => 'form-control'}) %>
-	</p>
+		<p></p>
+			<div style="text-align:center;">
+		<%= f.submit("Create account", {:class => 'btn btn-primary'}) %>
+		</div>
 
-	<p>
-		<%= f.submit({:class => 'btn btn-primary'}) %>
+		</div>
 	</p>
 <% end %>
