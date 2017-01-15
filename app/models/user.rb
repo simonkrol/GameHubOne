@@ -7,16 +7,16 @@ class User < ApplicationRecord
  	validates :password, confirmation: { message: "Passwords don't match" }
  	validates :password_confirmation, presence: { message: "Password confirmation is required" }
 
- 	has_secure_password
+ 	#has_secure_password
  	cattr_accessor :password, :password_confirmation
 
 
-	def initialize(attributes = {})
-		@name = attributes[:name]
-		@address = attributes[:address]
-		@email = attributes[:email]
-		@password = attributes[:password]
-	end
+	# def initialize(attributes = {})
+	# 	@name = attributes[:name]
+	# 	@address = attributes[:address]
+	# 	@email = attributes[:email]
+	# 	@password = attributes[:password]
+	# end
 end
 
 
