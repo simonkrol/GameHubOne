@@ -3,26 +3,25 @@
 	
 
 	<% if @user.errors.any? %>
-		<% @user.errors.each_with_index do |msg| %>
-			<div class="alert alert-danger"><%= msg[1] %></div>
+		<% @user.errors.full_messages.each do |msg| %>
+			<div class="alert alert-danger"><%= msg %></div>
 		<% end %>
 	<% end %>
-	<p>
 	<div class="col-md-6 col-md-offset-3", style="margin-bottom:10">
 		
-		<%= f.label 'Name'%><br>
+		<%= f.label 'Name*'%><br>
 		<%= f.text_field(:name, {:class => 'form-control'}) %>
 		<p></p>
 		<%=f.label :address%><br>
 		<%= f.text_field(:address, {:class => 'form-control'}) %>
 		<p></p>
-		<%=f.label :email%><br>
+		<%=f.label 'Email*'%><br>
 		<%= f.text_field(:email, {:class => 'form-control'}) %>
 		<p></p>
-		<%=f.label 'Password'%><br>
+		<%=f.label 'Password*'%><br>
 		<%= f.password_field(:password, {:class => 'form-control'}) %>
 		<p></p>
-		<%=f.label 'Confirm Password'%><br>
+		<%=f.label 'Confirm Password*'%><br>
 		<%= f.password_field(:password_confirmation, {:class => 'form-control'}) %>
 		<p></p>
 			<div style="text-align:center;">
