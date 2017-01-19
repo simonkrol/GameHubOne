@@ -28,43 +28,40 @@
 
           <% if logged_in? %>
             <ul class="nav navbar-nav navbar-right">
-              <li><%= link_to "Log out", signup_path %></li> 
+              <li><%= link_to "Log out", logout_path, method: "delete" %></li> 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><%= link_to "Settings", signup_path %></li> 
+              <li><%= link_to "Settings", '#' %></li> 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><%= link_to "Users", signup_path %></li> 
+              <li><%= link_to "Users", '#' %></li> 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><%= link_to "Profile", signup_path %></li> 
+              <li><%= link_to "Profile", current_user %></li> 
             </ul>
             
             
-          <% else %>
-            <ul class="nav navbar-nav navbar-right">
-              <li><%= link_to "Create Account", signup_path %></li> 
-            </ul>
+          <% else %> 
             <ul class="nav navbar-nav navbar-right">
               <li><%= link_to "Log in", login_path %></li> <!--Returns /user/new-->
             </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><%= link_to "Create Account", signup_path %></li> 
+            </ul>
+           
           <% end %>
-          <ul class="nav navbar-nav navbar-right">
-            <%= link_to image_tag("rails.png", alt: "Rails logo", width: "60px"),
-            'http://rubyonrails.org/' %>
-          </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-     <% flash.each do |message_type, message| %>
-        <div class="alert alert-<%= message_type %>"><%= message %></div>
-  <% end %>
+    <% flash.each do |message_type, message| %>
+      <div class="alert alert-<%= message_type %>"><%= message %></div>
+    <% end %>
     
 
 
-<div class="container">
-    <%= yield %>
-</div>
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
   <footer class="footer">
     <nav class="navbar navbar-default navbar-fixed-bottom">
@@ -77,6 +74,10 @@
         </ul>
         <ul class="nav navbar-nav navbar-left navbar-footer">
           <li><%= link_to "Help", help_path %></li> 
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <%= link_to image_tag("rails.png", alt: "Rails logo", width: "60px"),
+          'http://rubyonrails.org/' %>
         </ul>
       </div>
     </nav>
