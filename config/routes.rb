@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'sessions/new'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   
   root 'statics#home', as: 'home'
@@ -7,5 +9,8 @@ Rails.application.routes.draw do
   get  'about' => 'statics#about'
   get  'contact' => 'statics#contact'
   get  'signup' => 'users#new'
+  get    '/login',   to: 'sessions#new'
+  post   '/login',   to: 'sessions#create'
+  delete '/logout',  to: 'sessions#destroy'
   resources :users
 end
