@@ -1,0 +1,32 @@
+
+	
+<%= form_for(@user) do |f| %>
+	<% if @user.errors.any? %>
+		<% @user.errors.full_messages.each do |msg| %>
+			<div class="alert alert-danger"><%= msg %></div>
+		<% end %>
+	<% end %>
+	<div class="col-md-6 col-md-offset-3", style="margin-bottom:10">
+		
+		<%= f.label 'Name*'%><br>
+		<%= f.text_field(:name, {:class => 'form-control'}) %>
+		<p></p>
+		<%=f.label :address%><br>
+		<%= f.text_field(:address, {:class => 'form-control'}) %>
+		<p></p>
+		<%=f.label 'Email*'%><br>
+		<%= f.email_field(:email, {:class => 'form-control'}) %>
+		<p></p>
+		<%=f.label 'Password*'%><br>
+		<%= f.password_field(:password, {:class => 'form-control'}) %>
+		<p></p>
+		<%=f.label 'Confirm Password*'%><br>
+		<%= f.password_field(:password_confirmation, {:class => 'form-control'}) %>
+		<p></p>
+
+		<div style="text-align:center;">
+			<%= f.submit yield(:button_text), {:class => 'btn btn-primary'} %>
+		</div>
+
+	</div>
+<% end %>
