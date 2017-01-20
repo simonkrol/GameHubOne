@@ -33,9 +33,11 @@
             <ul class="nav navbar-nav navbar-right">
               <li><%= link_to "Settings", edit_user_path(current_user) %></li> 
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li><%= link_to "Users", '#' %></li> 
-            </ul>
+            <% if admin? %>
+              <ul class="nav navbar-nav navbar-right">
+                <li><%= link_to "Users", users_path %></li> 
+              </ul>
+            <% end %>
             <ul class="nav navbar-nav navbar-right">
               <li><%= link_to "Profile", current_user %></li> 
             </ul>

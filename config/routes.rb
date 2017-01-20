@@ -8,9 +8,10 @@ Rails.application.routes.draw do
   get  'help' => 'statics#help'
   get  'about' => 'statics#about'
   get  'contact' => 'statics#contact'
-  get  'signup' => 'users#new'
+  get    '/signup',  to: 'users#new'
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
+
   resources :users
 end

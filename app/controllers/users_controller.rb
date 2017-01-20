@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-	before_action :logged_in_user, only: [:edit, :update]
-	before_action :correct_user, only: [:edit, :update]
+	before_action :logged_in_user, only: [:show, :index, :edit, :update]
+	before_action :correct_user, only: [:show, :edit, :update]
+	before_action :administrator, only: [:index]
 	def index
 		@users=User.all
 	end
@@ -18,7 +19,7 @@ class UsersController < ApplicationController
 			log_in @user
 			redirect_to @user
 		else
-			render plain: 'create'
+			render 'new'
 		end
 	end
 
@@ -36,12 +37,19 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def destroy
+		@user = User.find(params[:id])
+		@user.destroy
+		redirect_to users_path
+	end
+
 	private def user_params
       params.require(:user).permit(:name, :address, :email, :password, :password_confirmation)
     end
 
     def logged_in_user
     	unless logged_in?
+    		store_location
     		flash[:danger] = "Please log in."
     		redirect_to login_url
     	end
@@ -49,7 +57,17 @@ class UsersController < ApplicationController
 
     def correct_user
     	@user = User.find(params[:id])
-    	flash[:danger] = "Invalid page"
-    	redirect_to(home_url) unless current_user?(@user)
+    	unless current_user?(@user) or admin?
+    		flash[:danger] = "Invalid page"
+    		redirect_to(home_url)
+    	end
+    	
+    end
+
+    def administrator
+    	unless admin?
+    		flash[:danger] = "Invalid page"
+    		redirect_to(home_url)
+    	end
     end
 end
