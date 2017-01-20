@@ -28,29 +28,20 @@
 
           <% if logged_in? %>
             <ul class="nav navbar-nav navbar-right">
-              <li><%= link_to "Log out", logout_path, method: "delete" %></li> 
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li><%= link_to "Settings", edit_user_path(current_user) %></li> 
-            </ul>
-            <% if admin? %>
-              <ul class="nav navbar-nav navbar-right">
-                <li><%= link_to "Users", users_path %></li> 
-              </ul>
-            <% end %>
-            <ul class="nav navbar-nav navbar-right">
               <li><%= link_to "Profile", current_user %></li> 
+              <% if admin? %>
+                <li><%= link_to "Users", users_path %></li> 
+              <% end %>
+              <li><%= link_to "Settings", edit_user_path(current_user) %></li> 
+              <li><%= link_to "Log out", logout_path, method: "delete" %></li> 
             </ul>
             
             
           <% else %> 
             <ul class="nav navbar-nav navbar-right">
               <li><%= link_to "Log in", login_path %></li> <!--Returns /user/new-->
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
               <li><%= link_to "Create Account", signup_path %></li> 
             </ul>
-           
           <% end %>
         </div><!--/.nav-collapse -->
       </div>
@@ -70,11 +61,7 @@
       <div class="navbar-footer container">
         <ul class="nav navbar-nav navbar-left navbar-footer">
           <li><%= link_to "About", about_path %></li> 
-        </ul>
-        <ul class="nav navbar-nav navbar-left navbar-footer">
           <li><%= link_to "Contact", contact_path %></li> 
-        </ul>
-        <ul class="nav navbar-nav navbar-left navbar-footer">
           <li><%= link_to "Help", help_path %></li> 
         </ul>
         <ul class="nav navbar-nav navbar-right">
