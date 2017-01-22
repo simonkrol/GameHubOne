@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 	end
 
 	def show 
-		@user = User.find(params[:id])
+		@user = User.find_by_id(params[:id])
 	end
 	def new
 		@user = User.new
@@ -24,11 +24,11 @@ class UsersController < ApplicationController
 	end
 
 	def edit
-		@user = User.find(params[:id])
+		@user = User.find_by_id(params[:id])
 	end
 
 	def update
-		@user = User.find(params[:id])
+		@user = User.find_by_id(params[:id])
 		if @user.update_attributes(user_params)
 			flash[:success] = "Profile updated"
 			redirect_to @user
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
 	end
 
 	def destroy
-		@user = User.find(params[:id])
+		@user = User.find_by_id(params[:id])
 		@user.destroy
 		redirect_to users_path
 	end
@@ -56,7 +56,7 @@ class UsersController < ApplicationController
     end
 
     def correct_user
-    	@user = User.find(params[:id])
+    	@user = User.find_by_id(params[:id])
     	unless current_user?(@user) or admin?
     		flash[:danger] = "Invalid page"
     		redirect_to(home_url)
