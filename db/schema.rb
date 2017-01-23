@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170119164106) do
+ActiveRecord::Schema.define(version: 20170123020503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "rooms", force: :cascade do |t|
+    t.integer  "owner"
+    t.text     "participants", default: [],              array: true
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.text     "name"
+    t.boolean  "private"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -21,10 +30,12 @@ ActiveRecord::Schema.define(version: 20170119164106) do
     t.string   "email"
     t.string   "password"
     t.string   "salt"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.string   "password_digest"
     t.string   "remember_digest"
+    t.integer  "rooms_in",        default: [],              array: true
+    t.integer  "rooms_owned",     default: [],              array: true
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
   end
 

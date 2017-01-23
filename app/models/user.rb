@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-
+	#has_many :rooms
 	has_secure_password
 	before_save { self.email=email.downcase }
 	validates :name, presence: { message: " is required" }

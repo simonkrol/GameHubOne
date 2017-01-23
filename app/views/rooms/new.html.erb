@@ -1,0 +1,22 @@
+<% provide(:title, "Create Room") %>
+<h1 style="text-align:center;">Create Room</h1>	
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for @room do |f| %>  <!--Submits to the room create method-->
+
+      <%= f.label 'Room name*' %>
+      <%= f.text_field :name, class: 'form-control' %>
+      <p></p>
+  
+      <%= f.check_box :private %>
+
+      <%= f.label 'Private?', :as => :boolean, :label => false, :inline_label => true%>
+    
+ 
+      <div style="text-align:center;">
+      <%= f.submit "Create room", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

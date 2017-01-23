@@ -1,0 +1,9 @@
+<h2><%= @room.name %></h2>
+<p>Owner: <%= User.find_by_id(@room.owner).name%></p>
+<% if current_user?(User.find_by_id(@room.owner)) or admin? %>
+<%= link_to "Edit", edit_room_path(@room), :class => 'btn btn-default' %>
+<%= link_to "Delete", room_path(@room), 
+					method: :delete,
+					data: {confirm: 'Are you sure?'},
+					:class => 'btn btn-danger' %>
+<% end %>

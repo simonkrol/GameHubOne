@@ -1,0 +1,19 @@
+<% unless admin? %>
+	<% @user=current_user.rooms_owned %>
+	<% @user.each do |room| %>
+		<% curroom=Room.find_by_id(room) %>
+	  	<ul>
+	    	<li>
+	      		<%= link_to curroom.name, curroom %>
+	    	</li>
+	    </ul>
+	<% end %>
+<% else %>
+	<% Room.all.each do |room| %>
+		<ul>
+	    	<li>
+	      		<%= link_to room.name, room %>
+	    	</li>
+	    </ul>
+	  <% end %>
+<% end %>
