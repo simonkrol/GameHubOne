@@ -4,6 +4,7 @@ class User < ApplicationRecord
 	before_save { self.email=email.downcase }
 	validates :name, presence: { message: " is required" }
 	validates :email, uniqueness: { case_sensitive: false, message: "already in use" } 
+	validates :username, presence: { message: " is required" }
  	attr_accessor :remember_token
  	
 
