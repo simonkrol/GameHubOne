@@ -1,4 +1,8 @@
-<h2><%= @room.name %></h2>
+<h2><%= @room.name %>
+	<% if @room.private %>
+		(Private)
+	<% end %>
+</h2>
 <p>Owner: <%= User.find_by_id(@room.owner).name%></p>
 <% if current_user?(User.find_by_id(@room.owner)) or admin? %>
 <%= link_to "Edit", edit_room_path(@room), :class => 'btn btn-default' %>

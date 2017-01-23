@@ -1,19 +1,22 @@
+<u><h1 style="text-align:center;">Your Rooms</h1></u>
 <% unless admin? %>
 	<% @user=current_user.rooms_owned %>
-	<% @user.each do |room| %>
-		<% curroom=Room.find_by_id(room) %>
-	  	<ul>
-	    	<li>
-	      		<%= link_to curroom.name, curroom %>
-	    	</li>
-	    </ul>
-	<% end %>
+		<ul >
+			<% @user.each do |room| %>
+				<% curroom=Room.find_by_id(room) %>
+	  			
+	    			
+	      			<h2 style="text-align:center;">	<%= link_to curroom.name, curroom %></h2>
+	    			
+	    		
+			<% end %>
+				
+			</ul>
+		</div>
+	</div>
 <% else %>
 	<% Room.all.each do |room| %>
-		<ul>
-	    	<li>
-	      		<%= link_to room.name, room %>
-	    	</li>
-	    </ul>
-	  <% end %>
+      		<h3><%= link_to room.name, room %> by <%= User.find_by_id(room.owner).name %></h3>
+   	<% end %>
 <% end %>
+
