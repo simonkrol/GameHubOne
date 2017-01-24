@@ -1,22 +1,24 @@
-<u><h1 style="text-align:center;">Your Rooms</h1></u>
+
 <% unless admin? %>
+	<u><h1 style="text-align:center;">Owned Rooms</h1></u>
 	<% @user=current_user.rooms_owned %>
-		<ul >
-			<% @user.each do |room| %>
-				<% curroom=Room.find_by_id(room) %>
-	  			
-	    			
-	      			<h2 style="text-align:center;">	<%= link_to curroom.name, curroom %></h2>
-	    			
-	    		
-			<% end %>
-				
-			</ul>
-		</div>
-	</div>
-<% else %>
+	<ul >
+		<% @user.each do |room| %>
+			<% curroom=Room.find_by_id(room) %>
+	   		<h2 style="text-align:center;">	<%= link_to curroom.name, curroom %></h2>
+		<% end %>
+	</ul>
+	<u><h1 style="text-align:center;">Rooms</h1></u>
+	<% @user=current_user.rooms_in %>
+	<ul >
+		<% @user.each do |room| %>
+			<% curroom=Room.find_by_id(room) %>
+	   		<h2 style="text-align:center;">	<%= link_to curroom.name, curroom %></h2>
+		<% end %>
+	</ul>
+<% else %> <!-- remove and format to allow for room browsing -->
 	<% Room.all.each do |room| %>
-      		<h3><%= link_to room.name, room %> by <%= User.find_by_id(room.owner).name %></h3>
+     	<h3><%= link_to room.name, room %> by <%= User.find_by_id(room.owner).username %></h3>
    	<% end %>
 <% end %>
 

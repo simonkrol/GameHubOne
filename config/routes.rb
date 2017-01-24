@@ -14,6 +14,11 @@ Rails.application.routes.draw do
   delete '/logout',  to: 'sessions#destroy'
 
   resources :users
-  resources :rooms
+  resources :rooms do
+    member do
+      get :add_participant
+      get :remove_user
+    end
+  end
   get '*path' => redirect('/')
 end
