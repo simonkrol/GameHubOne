@@ -1,29 +1,17 @@
-# Ruby on Rails Secret Santa Application
-
+# Ruby on Rails GameHub Application
+Application for users to create "rooms" where they may connect with other users within the same gaming communities
 
 ## Getting started
 
-To get started with the app, clone the repo and then install the needed gems:
+To get started with the app, clone the repo and install the needed gems:
 
-```
+
 $ bundle install --without production
-```
 
-Then, migrate the database:
-
-```
+Then, migrate the database and start the webserver:
 $ rails db:migrate
-```
-
-Finally, run the test suite to verify that everything is working correctly:
-
-```
-$ rails test
-```
-
-If the test suite passes, you'll be ready to run the app in a local server:
-
-```
 $ rails server
-```
 
+The application should be found hosted on localhost:3000
+
+As well, the application can be found at https://GameHubOne.herokuapp.com
