@@ -28,7 +28,7 @@ class RoomsController < ApplicationController
       flash[:success] = "Successfully created room!"
       #@owned=current_user.rooms_owned.push(@room.id)
       current_user.update_attribute(:rooms_owned, current_user.rooms_owned.push(@room.id))
-      current_user.update_attribute(:rooms_in, current_user.rooms_in.push(@room.id))
+      #current_user.update_attribute(:rooms_in, current_user.rooms_in.push(@room.id))
       #render plain:current_user.inspect
       redirect_to @room
     else
