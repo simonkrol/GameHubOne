@@ -16,26 +16,13 @@
            		</tr>
            	</thead>
 	        <tbody>
-            	<% current_user.rooms_owned.each do |room_id| %>
+              <% @user=current_user %>
+            	<% @user.rooms.each do |room| %>
             		<tr>
-            			<% room = Room.find_by_id(room_id) %>
-            			<% owner = User.find_by_id(room.owner) %>
-            			<td><%= room_id %></td>
+                  <% @owner = room.room_owners.user %>
+            			<td><%= room.id %></td>
             			<td><%= link_to room.name, room %></td>
-            			<td><%= link_to owner.username, owner %></td>
-            			<% if admin? %>
-            				<td><%= room.updated_at %></td>
-            			<% end %>
-
-            		</tr>
-            	<% end %>
-            	<% current_user.rooms_in.each do |room_id| %>
-            		<tr>
-            			<% room = Room.find_by_id(room_id) %>
-            			<% owner = User.find_by_id(room.owner) %>
-            			<td><%= room_id %></td>
-            			<td><%= link_to room.name, room %></td>
-            			<td><%= link_to owner.username, owner %></td>
+            			<td><%= link_to @owner.username, owner %></td>
             			<% if admin? %>
             				<td><%= room.updated_at %></td>
             			<% end %>
@@ -46,7 +33,7 @@
         </table>
     </div>
 </div>
-<h3>Other Rooms</h3>
+<!--<h3>Other Rooms</h3>
 <div class="row">
     <div class="col-md-6">
         <table class="table">
@@ -55,25 +42,25 @@
                		<th>#</th>
                		<th>Name</th>
                		<th>Owner</th>
-               		<% if admin? %>
+               		<%# if admin? %>
             			<th>Recent Activity</th>
-            		<% end %>
+            		<% #end %>
            		</tr>
            	</thead>
 	        <tbody>
-            	<% @rooms.each do |room| %>
-            		<% unless current_user.rooms_owned.include?(room.id) or current_user.rooms_in.include?(room.id) %>
+            	<% @rooms.each #do |room| %>
+            		<% #unless current_user.rooms_owned.include?(room.id) or current_user.rooms_in.include?(room.id) %>
             		<tr>
-            			<% owner = User.find_by_id(room.owner) %>
+            			<% #owner = User.find_by_id(room.owner) %>
             			<td><%= room.id %></td>
-            			<td><%= link_to room.name, room %></td>
+            			<td><%= #link_to room.name, room %></td>
             			<td><%= link_to owner.username, owner %></td>
-            			<% if admin? %>
+            			<% #if admin? %>
             				<td><%= room.updated_at %></td>
-            			<% end %>
+            			<%# end %>
             		</tr>
-            		<% end %>
-            	<% end %>
+            		<% #end %>
+            	<% #end %>
             </tbody>
         </table>
     </div>

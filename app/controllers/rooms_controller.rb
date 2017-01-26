@@ -20,16 +20,15 @@ class RoomsController < ApplicationController
     @room = Room.new(room_params)
     @user = current_user.id
     @room.owner=@user
-    @room.participants.push(@user)
+
     if(!admin? and current_user.rooms_owned.length>=3)
       flash[:danger] = "Only 3 rooms may be owned at once, please delete a room and try again!"
       redirect_to rooms_path
     elsif(@room.save)
       flash[:success] = "Successfully created room!"
       #@owned=current_user.rooms_owned.push(@room.id)
-      current_user.update_attribute(:rooms_owned, current_user.rooms_owned.push(@room.id))
-      #current_user.update_attribute(:rooms_in, current_user.rooms_in.push(@room.id))
-      #render plain:current_user.inspect
+      #current_user.update_attribute(:rooms_owned, current_user.rooms_owned.push(@room.id))
+      current_user.roomusers.create(user_id: current_user.id, room_id: params[:commit])
       redirect_to @room
     else
       render 'new'

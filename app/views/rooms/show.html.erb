@@ -11,12 +11,30 @@
 					data: {confirm: 'Are you sure?'},
 					:class => 'btn btn-danger' %>
 <% end %>
-<% if not current_user.rooms_in.include?(@room.id) and not current_user?(User.find_by_id(@room.owner))%>
+<% if not current_user.userrooms.rooms.id.include?(@room.id)%>
 	<% if @room.private %>
-		<%= link_to "Request to join room", room_path(@room), :class => 'btn btn-default' %>
+		<%= form_for(@roomuser) do |f| %>
+			<div class="col-md-6 col-md-offset-3", style="margin-bottom:10">
+				<div style="text-align:center;">
+					<%= f.submit yield('Request to Join Room'), value:@room.id, class: 'btn btn-warning' %>
+				</div>
+			</div>
+		<% end %>
 	<% else %>
-		<%= link_to "Join Room", add_participant_room_path(@room), :class => 'btn btn-default' %>
+		<%= form_for(@roomuser) do |f| %>
+			<div class="col-md-6 col-md-offset-3", style="margin-bottom:10">
+				<div style="text-align:center;">
+					<%= f.submit yield('Join Room'), value:@room.id, class: 'btn btn-success' %>
+				</div>
+			</div>
+		<% end %>
 	<% end %>
-<% elsif !current_user?(User.find_by_id(@room.owner))%>
-	<%= link_to "Leave Room", remove_user_room_path(@room), :class => 'btn btn-danger' %>
+<% elsif not current_user.roowowners.room_id.include?(@room.owner)%>
+	<%= form_for(@roomuser) do |f| %>
+		<div class="col-md-6 col-md-offset-3", style="margin-bottom:10">
+			<div style="text-align:center;">
+				<%= f.submit yield('Leave Room'), value:@room.id, class: 'btn btn-danger' %>
+			</div>
+		</div>
+	<% end %>
 <% end %>

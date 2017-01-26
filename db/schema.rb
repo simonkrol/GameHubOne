@@ -10,21 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170123183632) do
+ActiveRecord::Schema.define(version: 20170126015712) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "roomowners", force: :cascade do |t|
+    t.integer  "room_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_roomowners_on_room_id", using: :btree
+    t.index ["user_id"], name: "index_roomowners_on_user_id", using: :btree
+  end
+
   create_table "rooms", force: :cascade do |t|
     t.integer  "owner"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.text     "name"
     t.boolean  "private"
     t.boolean  "console"
     t.boolean  "desktop"
     t.boolean  "mobile"
-    t.integer  "participants", default: [],              array: true
+  end
+
+  create_table "roomusers", force: :cascade do |t|
+    t.integer  "room_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_roomusers_on_room_id", using: :btree
+    t.index ["user_id"], name: "index_roomusers_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -32,12 +49,10 @@ ActiveRecord::Schema.define(version: 20170123183632) do
     t.string   "username"
     t.string   "email"
     t.string   "password"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.string   "password_digest"
     t.string   "remember_digest"
-    t.integer  "rooms_in",        default: [],              array: true
-    t.integer  "rooms_owned",     default: [],              array: true
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
   end
 
