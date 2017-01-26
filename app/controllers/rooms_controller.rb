@@ -91,7 +91,7 @@ class RoomsController < ApplicationController
     @room=Room.find_by_id(params[:id])
     @room.update_attribute(:participants, @room.participants.push(@user.id))
     @user.update_attribute(:rooms_in, @user.rooms_in.push(@room.id))
-    redirect_to(@room)
+    render 'show'
   end
 
   def remove_participants(id)
@@ -104,7 +104,7 @@ class RoomsController < ApplicationController
   def remove_user
     @room=Room.find_by_id(params[:id])
     remove_participant(@room, current_user)
-    redirect_to(@room)
+    render 'show'
   end
   def remove_participant(room, user)
     room.update_attribute(:participants, room.participants-[user.id])
