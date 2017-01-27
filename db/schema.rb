@@ -10,21 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170123183632) do
+ActiveRecord::Schema.define(version: 20170126174825) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "rooms", force: :cascade do |t|
     t.integer  "owner"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.text     "name"
     t.boolean  "private"
     t.boolean  "console"
     t.boolean  "desktop"
     t.boolean  "mobile"
-    t.integer  "participants", default: [],              array: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -32,13 +31,18 @@ ActiveRecord::Schema.define(version: 20170123183632) do
     t.string   "username"
     t.string   "email"
     t.string   "password"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.string   "password_digest"
     t.string   "remember_digest"
-    t.integer  "rooms_in",        default: [],              array: true
-    t.integer  "rooms_owned",     default: [],              array: true
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+  end
+
+  create_table "users_rooms", id: false, force: :cascade do |t|
+    t.integer "users_id"
+    t.integer "rooms_id"
+    t.index ["rooms_id"], name: "index_users_rooms_on_rooms_id", using: :btree
+    t.index ["users_id"], name: "index_users_rooms_on_users_id", using: :btree
   end
 
 end
