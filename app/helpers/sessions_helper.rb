@@ -30,7 +30,7 @@ module SessionsHelper
 	end
 
 	def admin?
-		current_user[:email]=='redstonewarlock@gmail.com'
+		current_user[:email]=='dev@gamehubone.com'
 	end
 	def forget(user)
 		user.forget

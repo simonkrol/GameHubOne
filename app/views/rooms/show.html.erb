@@ -3,20 +3,21 @@
 		(Private)
 	<% end %>
 </h2>
-<p>Owner: <%= User.find_by_id(@room.owner).name%></p>
-<% if current_user?(User.find_by_id(@room.owner)) or admin? %>
+<%= debug @room %>
+<p>Owner: <%= @room.owner%></p>
+<% if current_user?(@room.owner) or admin? %>
 	<%= link_to "Edit", edit_room_path(@room), :class => 'btn btn-default' %>
 	<%= link_to "Delete", room_path(@room), 
 					method: :delete,
 					data: {confirm: 'Are you sure?'},
 					:class => 'btn btn-danger' %>
 <% end %>
-<% if not current_user.rooms_in.include?(@room.id) and not current_user?(User.find_by_id(@room.owner))%>
+<% if not current_user.rooms.include?(@room) and not current_user?(room.owner)%>
 	<% if @room.private %>
 		<%= link_to "Request to join room", room_path(@room), :class => 'btn btn-default' %>
 	<% else %>
 		<%= link_to "Join Room", add_participant_room_path(@room), :class => 'btn btn-default' %>
 	<% end %>
-<% elsif !current_user?(User.find_by_id(@room.owner))%>
+<% elsif !current_user?(@room.owner)%>
 	<%= link_to "Leave Room", remove_user_room_path(@room), :class => 'btn btn-danger' %>
 <% end %>

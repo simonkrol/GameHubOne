@@ -6,7 +6,7 @@ class RoomsController < ApplicationController
 
 
   def index
-    @rooms=Room.all
+    @rooms= current_user.rooms.all
   end
 
   def show 
@@ -18,16 +18,17 @@ class RoomsController < ApplicationController
 
   def create
     @room = Room.new(room_params)
-    @user = current_user.id
+    @user = current_user
     @room.owner=@user
-    @room.participants.push(@user)
-    if(!admin? and current_user.rooms_owned.length>=3)
+    #@room.participants.push(@user)
+    if(!admin? and @user.rooms_owned.length>=3)
       flash[:danger] = "Only 3 rooms may be owned at once, please delete a room and try again!"
       redirect_to rooms_path
     elsif(@room.save)
       flash[:success] = "Successfully created room!"
+
       #@owned=current_user.rooms_owned.push(@room.id)
-      current_user.update_attribute(:rooms_owned, current_user.rooms_owned.push(@room.id))
+      #current_user.update_attribute(:rooms_owned, current_user.rooms_owned.push(@room.id))
       #current_user.update_attribute(:rooms_in, current_user.rooms_in.push(@room.id))
       #render plain:current_user.inspect
       redirect_to @room
@@ -38,9 +39,10 @@ class RoomsController < ApplicationController
 
   def destroy
     @room = Room.find_by_id(params[:id])
-    @owner=User.find_by_id(@room.owner)
-    @owner.update_attribute(:rooms_owned, @owner.rooms_owned-[@room.id])
-    remove_participants(@room.id)
+    #@owner=User.find_by_id(@room.owne
+    @owner=@room.owner
+    #@owner.update_attribute(:rooms_owned, @owner.rooms_owned-[@room.id])
+    #remove_participants(@room.id)
     @room.destroy
     redirect_to rooms_path
   end

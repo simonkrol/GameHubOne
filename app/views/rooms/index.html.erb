@@ -16,11 +16,10 @@
            		</tr>
            	</thead>
 	        <tbody>
-            	<% current_user.rooms_owned.each do |room_id| %>
+            	<% @rooms.each do |room| %>
             		<tr>
-            			<% room = Room.find_by_id(room_id) %>
-            			<% owner = User.find_by_id(room.owner) %>
-            			<td><%= room_id %></td>
+            			<% owner = room.owner %>
+            			<td><%= room.id %></td>
             			<td><%= link_to room.name, room %></td>
             			<td><%= link_to owner.username, owner %></td>
             			<% if admin? %>
